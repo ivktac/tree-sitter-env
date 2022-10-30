@@ -1,3 +1,6 @@
+// most of the code have been taken and rewritten
+// from https://github.com/camdencheek/tree-sitter-dockerfile/blob/main/grammar.js
+
 module.exports = grammar({
   name: "env",
 
@@ -21,29 +24,16 @@ module.exports = grammar({
       alias(/[a-zA-Z]([a-zA-Z0-9_]*[a-zA-Z0-9])?/, $.unquoted_string),
 
     quoted_string: ($) =>
-      choice(
-        seq(
-          '"',
-          repeat(
-            choice(
-              token.immediate(/[^"\n\\\$]+/),
-              $.escape_sequence,
-              $._expansion
-            )
-          ),
-          '"'
+      seq(
+        '"',
+        repeat(
+          choice(
+            token.immediate(/[^"\n\\\$]+/),
+            $.escape_sequence,
+            $._expansion
+          )
         ),
-        seq(
-          "'",
-          repeat(
-            choice(
-              token.immediate(/[^"\n\\\$]+/),
-              $.escape_sequence,
-              $._expansion
-            )
-          ),
-          "'"
-        )
+        '"'
       ),
 
     unquoted_string: ($) =>
