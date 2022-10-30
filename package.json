@@ -1,0 +1,35 @@
+{
+  "name": "tree-sitter-env",
+  "version": "0.0.1",
+  "description": "An env grammar for tree-sitter",
+  "main": "bindings/node",
+  "scripts": {
+    "test": "tree-sitter test",
+    "format": "prettier --trailing-comma es5 --check grammar.js",
+    "format-check": "prettier --trailing-comma es5 --check grammar.js"
+  },
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [
+    "tree-sitter",
+    "parser",
+    "lexer",
+    "env"
+  ],
+  "author": "seshotake",
+  "license": "MIT",
+  "dependencies": {
+    "nan": "^2.17.0"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.20.7"
+  },
+  "tree-sitter": [
+    {
+      "file-types": [
+        "env"
+      ]
+    }
+  ]
+}

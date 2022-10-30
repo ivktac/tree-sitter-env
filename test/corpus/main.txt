@@ -1,0 +1,62 @@
+==================
+one variable
+==================
+
+foo=bar
+
+---
+
+(document
+  (variable (variable_name) (variable_value)))
+
+==================
+many variables
+==================
+
+foo=bar
+bar=foo
+
+---
+
+(document
+  (variable (variable_name) (variable_value))
+  (variable (variable_name) (variable_value)))
+
+==================
+variables with comments
+==================
+
+# Set root to POSTGRES_USER
+POSTGRES_USER=root
+POSTGRES_URL=postgres://posgres:123456@127.0.0.1:5432/dummy # connection url
+
+---
+
+(document
+  (comment)
+  (variable (variable_name) (variable_value))
+  (variable (variable_name) (variable_value)) (comment))
+
+==================
+quoted values
+==================
+
+foo="bar"
+bar='foo'
+
+---
+
+(document
+  (variable (variable_name) (variable_value))
+  (variable (variable_name) (variable_value)))
+
+==================
+variable without value
+==================
+
+foo=
+
+---
+
+(document 
+  (variable (variable_name)))
