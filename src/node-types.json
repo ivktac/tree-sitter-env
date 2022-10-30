@@ -1,21 +1,21 @@
 [
   {
-    "type": "document",
+    "type": "env_key",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
-      "required": false,
+      "multiple": false,
+      "required": true,
       "types": [
         {
-          "type": "variable",
+          "type": "unquoted_string",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "variable",
+    "type": "env_variable",
     "named": true,
     "fields": {
       "name": {
@@ -23,7 +23,7 @@
         "required": true,
         "types": [
           {
-            "type": "variable_name",
+            "type": "env_key",
             "named": true
           }
         ]
@@ -33,7 +33,11 @@
         "required": false,
         "types": [
           {
-            "type": "variable_value",
+            "type": "quoted_string",
+            "named": true
+          },
+          {
+            "type": "unquoted_string",
             "named": true
           }
         ]
@@ -41,7 +45,95 @@
     }
   },
   {
+    "type": "expansion",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "quoted_string",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "expansion",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "source_file",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "env_variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "unquoted_string",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "expansion",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "\n",
+    "named": false
+  },
+  {
+    "type": "\"",
+    "named": false
+  },
+  {
+    "type": "$",
+    "named": false
+  },
+  {
+    "type": "'",
+    "named": false
+  },
+  {
     "type": "=",
+    "named": false
+  },
+  {
+    "type": "\\ ",
     "named": false
   },
   {
@@ -49,11 +141,19 @@
     "named": true
   },
   {
-    "type": "variable_name",
+    "type": "escape_sequence",
     "named": true
   },
   {
-    "type": "variable_value",
+    "type": "variable",
     "named": true
+  },
+  {
+    "type": "{",
+    "named": false
+  },
+  {
+    "type": "}",
+    "named": false
   }
 ]

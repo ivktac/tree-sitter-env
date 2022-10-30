@@ -6,8 +6,11 @@ foo=bar
 
 ---
 
-(document
-  (variable (variable_name) (variable_value)))
+(source_file
+  (env_variable 
+    (env_key
+      (unquoted_string))
+      (unquoted_string)))
 
 ==================
 many variables
@@ -18,9 +21,15 @@ bar=foo
 
 ---
 
-(document
-  (variable (variable_name) (variable_value))
-  (variable (variable_name) (variable_value)))
+(source_file
+      (env_variable
+        (env_key
+          (unquoted_string))
+        (unquoted_string))
+      (env_variable
+        (env_key
+          (unquoted_string))
+        (unquoted_string)))
 
 ==================
 variables with comments
@@ -32,10 +41,18 @@ POSTGRES_URL=postgres://posgres:123456@127.0.0.1:5432/dummy # connection url
 
 ---
 
-(document
+(source_file
   (comment)
-  (variable (variable_name) (variable_value))
-  (variable (variable_name) (variable_value)) (comment))
+  (env_variable
+    (env_key
+      (unquoted_string))
+    (unquoted_string))
+  (env_variable
+    (env_key
+      (unquoted_string))
+    (unquoted_string))
+  (comment))
+
 
 ==================
 quoted values
@@ -46,9 +63,15 @@ bar='foo'
 
 ---
 
-(document
-  (variable (variable_name) (variable_value))
-  (variable (variable_name) (variable_value)))
+(source_file
+      (env_variable
+        (env_key
+          (unquoted_string))
+        (quoted_string))
+      (env_variable
+        (env_key
+          (unquoted_string))
+        (unquoted_string)))
 
 ==================
 variable without value
@@ -58,5 +81,25 @@ foo=
 
 ---
 
-(document 
-  (variable (variable_name)))
+(source_file
+  (env_variable
+    (env_key
+      (unquoted_string))))
+
+==================
+variable with another variable
+==================
+
+foo=${bar}:${bar}
+
+---
+
+(source_file
+      (env_variable
+        (env_key
+          (unquoted_string))
+        (unquoted_string
+          (expansion
+            (variable))
+          (expansion
+            (variable)))))
