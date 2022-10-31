@@ -28,7 +28,7 @@ module.exports = grammar({
         '"',
         repeat(
           choice(
-            token.immediate(/[^"\n\\\$]+/),
+            token.immediate(/[^#="\n\\\$]+/),
             $.escape_sequence,
             $._expansion
           )
@@ -39,7 +39,7 @@ module.exports = grammar({
     unquoted_string: ($) =>
       repeat1(
         choice(
-          token.immediate(/[^\s\n\"\\\$]+/),
+          token.immediate(/[^#=\s\n\"\\\$]+/),
           token.immediate("\\ "),
           $._expansion
         )
@@ -73,7 +73,7 @@ module.exports = grammar({
         )
       ),
 
-    variable: ($) => token.immediate(/[^#\n][a-zA-Z][a-zA-Z0-9_]*/),
+    variable: ($) => token.immediate(/[^#=\n][a-zA-Z][a-zA-Z0-9_]*/),
 
     comment: ($) => token(seq("#", /.*/)),
   },
