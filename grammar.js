@@ -21,7 +21,7 @@ module.exports = grammar({
       ),
 
     env_key: ($) =>
-      alias(/[a-zA-Z]([a-zA-Z0-9_]*[a-zA-Z0-9])?/, $.unquoted_string),
+      alias(/[^#=\s\[\]]+/, $.unquoted_string),
 
     quoted_string: ($) =>
       seq(
@@ -73,7 +73,7 @@ module.exports = grammar({
         )
       ),
 
-    variable: ($) => token.immediate(/[a-zA-Z][a-zA-Z0-9_]*/),
+    variable: ($) => token.immediate(/[^#\n][a-zA-Z][a-zA-Z0-9_]*/),
 
     comment: ($) => token(seq("#", /.*/)),
   },
